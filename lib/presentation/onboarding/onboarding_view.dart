@@ -58,7 +58,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       appBar: AppBar(
         backgroundColor: ColorManager.lightPrimary,
         elevation: AppSize.s0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: ColorManager.lightPrimary,
             statusBarBrightness: Brightness.light),
       ),

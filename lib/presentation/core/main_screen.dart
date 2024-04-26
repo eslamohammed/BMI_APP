@@ -8,7 +8,7 @@ import 'package:ibm_task/presentation/utils/strings_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 import 'package:ibm_task/widget/custom_button.dart';
 import '../../widget/container_box.dart';
-import '../../widget/data_container.dart';
+import 'data_container.dart';
 
 // final activeColor = Colors.cyan.shade800;
 final activeColor = ColorManager.primary;
