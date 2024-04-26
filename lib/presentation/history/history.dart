@@ -12,11 +12,11 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
   var historyList = [
-    History(height: 180, weight: 70, gender: 'male', age: 25, bmiStatus: '${70/(1.8*1.8)}',),
-    History(height: 180, weight: 65, gender: 'male', age: 25, bmiStatus: '${65/(1.8*1.8)}',),
-    History(height: 180, weight: 90, gender: 'male', age: 25, bmiStatus: '${90/(1.8*1.8)}',),
-    History(height: 180, weight: 75, gender: 'male', age: 25, bmiStatus: '${75/(1.8*1.8)}',),
-    History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: '${80/(1.8*1.8)}',),
+    // History(height: 180, weight: 70, gender: 'male', age: 25, bmiStatus: '${70/(1.8*1.8)}',),
+    // History(height: 180, weight: 65, gender: 'male', age: 25, bmiStatus: '${65/(1.8*1.8)}',),
+    // History(height: 180, weight: 90, gender: 'male', age: 25, bmiStatus: '${90/(1.8*1.8)}',),
+    // History(height: 180, weight: 75, gender: 'male', age: 25, bmiStatus: '${75/(1.8*1.8)}',),
+    // History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: '${80/(1.8*1.8)}',),
   ];
 class _HistoryPageState extends State<HistoryPage> {
   @override
