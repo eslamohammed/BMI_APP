@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
 
+import '../../widget/historyWidget.dart';
 import '../utils/styles_manager.dart';
 import '../utils/values_manager.dart';
 
@@ -19,7 +20,7 @@ var historyList = [
   // History(height: 180, weight: 65, gender: 'male', age: 25, bmiStatus: '${65/(1.8*1.8)}',),
   // History(height: 180, weight: 90, gender: 'male', age: 25, bmiStatus: '${90/(1.8*1.8)}',),
   // History(height: 180, weight: 75, gender: 'male', age: 25, bmiStatus: '${75/(1.8*1.8)}',),
-  // History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: '${80/(1.8*1.8)}',),
+  const History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: '${80/(1.8*1.8)}',),
 ];
 
 class _HistoryPageState extends State<HistoryPage> {

@@ -8,6 +8,8 @@ import 'package:ibm_task/presentation/utils/strings_manager.dart';
 import 'package:ibm_task/presentation/utils/styles_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 import 'package:ibm_task/widget/custom_button.dart';
+import 'package:pretty_gauge/pretty_gauge.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../widget/container_box.dart';
 import '../../widget/data_container.dart';
 
@@ -120,14 +122,19 @@ class _MainScreenState extends State<MainScreen> {
             childWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                 Text(AppStrings.height, style: bodyText2.copyWith(color: ColorManager.deepBlue)),
+                Text(AppStrings.height,
+                    style: bodyText2.copyWith(color: ColorManager.deepBlue)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: <Widget>[
-                    Text(height.toString(), style: headline1.copyWith(color: ColorManager.deepBlue)),
-                     Text(AppStrings.cm, style: bodyText2.copyWith(color: ColorManager.deepBlue)),
+                    Text(height.toString(),
+                        style:
+                            headline1.copyWith(color: ColorManager.deepBlue)),
+                    Text(AppStrings.cm,
+                        style:
+                            bodyText2.copyWith(color: ColorManager.deepBlue)),
                   ],
                 ),
                 Slider(
@@ -155,8 +162,12 @@ class _MainScreenState extends State<MainScreen> {
                     childWidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                         Text(AppStrings.weight, style: bodyText2.copyWith(color: ColorManager.deepBlue)),
-                        Text(weight.toString(), style: headline1.copyWith(color: ColorManager.deepBlue)),
+                        Text(AppStrings.weight,
+                            style: bodyText2.copyWith(
+                                color: ColorManager.deepBlue)),
+                        Text(weight.toString(),
+                            style: headline1.copyWith(
+                                color: ColorManager.deepBlue)),
                         const SizedBox(
                           height: 5.0,
                         ),
@@ -196,8 +207,12 @@ class _MainScreenState extends State<MainScreen> {
                     childWidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                         Text(AppStrings.age, style: bodyText2.copyWith(color: ColorManager.deepBlue)),
-                        Text(age.toString(), style: headline1.copyWith(color: ColorManager.deepBlue)),
+                        Text(AppStrings.age,
+                            style: bodyText2.copyWith(
+                                color: ColorManager.deepBlue)),
+                        Text(age.toString(),
+                            style: headline1.copyWith(
+                                color: ColorManager.deepBlue)),
                         const SizedBox(
                           height: 5.0,
                         ),
@@ -256,7 +271,125 @@ class _MainScreenState extends State<MainScreen> {
           Container(
               margin: const EdgeInsets.all(AppMargin.m16),
               height: AppSize.s50,
-              child: CustomButton(label: AppStrings.calculate, onClick: () {}))
+              child: CustomButton(
+                  label: AppStrings.calculate,
+                  onClick: () {
+                    setState(() {
+                      result = calculateBmi(weight, height);
+                      resultDetail = getInterpretation(bmi);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: ColorManager.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.s16),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SfRadialGauge(
+                                      title: const GaugeTitle(
+                                          text: 'BMI',
+                                          textStyle: TextStyle(
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.bold)),
+                                      axes: <RadialAxis>[
+                                        RadialAxis(
+                                            minimum: 0,
+                                            maximum: 50,
+                                            startAngle: 180,
+                                            endAngle: 0,
+                                            radiusFactor: 0.90,
+                                            showAxisLine: false,
+                                            showLastLabel: true,
+                                            showLabels: true,
+                                            canRotateLabels: false,
+                                            ranges: <GaugeRange>[
+                                              GaugeRange(
+                                                startValue: 0,
+                                                endValue: 16,
+                                                color: Colors.red[700],
+                                                startWidth: 10,
+                                                endWidth: 10,
+                                              ),
+                                              GaugeRange(
+                                                startValue: 16,
+                                                endValue: 17,
+                                                color: Colors.red[300],
+                                                startWidth: 10,
+                                                endWidth: 10,
+                                              ),
+                                              GaugeRange(
+                                                  startValue: 17,
+                                                  endValue: 18.5,
+                                                  color: Colors.yellow,
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                              GaugeRange(
+                                                  startValue: 18.5,
+                                                  endValue: 25,
+                                                  color: Colors.green,
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                              GaugeRange(
+                                                  startValue: 25,
+                                                  endValue: 30,
+                                                  color: Colors.yellow,
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                              GaugeRange(
+                                                  startValue: 30,
+                                                  endValue: 35,
+                                                  color: Colors.red[300],
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                              GaugeRange(
+                                                  startValue: 35,
+                                                  endValue: 40,
+                                                  color: Colors.red[600],
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                              GaugeRange(
+                                                  startValue: 40,
+                                                  endValue: 50,
+                                                  color: Colors.red,
+                                                  startWidth: 10,
+                                                  endWidth: 10),
+                                            ],
+                                            pointers: const <GaugePointer>[
+                                              NeedlePointer(value: 18)
+                                            ],
+                                            annotations: const <GaugeAnnotation>[
+                                              GaugeAnnotation(
+                                                  widget: Text('BMI = ',
+                                                      style: TextStyle(
+                                                          fontSize: 25,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  angle: 90,
+                                                  positionFactor: 0.5)
+                                            ])
+                                      ]),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 5.0, bottom: 5.0),
+                                    child: Text(
+                                      result.toString(),
+                                      style: bodyText2,
+                                    ),
+                                  ),
+                                  Text(
+                                    resultDetail,
+                                    style: bodyText2,
+                                  )
+                                ],
+                              ),
+                            );
+                          });
+                    });
+                  }))
         ],
       ),
     );
