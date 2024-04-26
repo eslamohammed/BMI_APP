@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "697193972484",
+    "project_id": "bmiapp-49203",
+    "storage_bucket": "bmiapp-49203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697193972484:android:9a38be7e16b4ea5cc48651",
+        "android_client_info": {
+          "package_name": "com.example.ibm_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrGcdvOp0czZaaXGyWpiGKVpV7y3sGe9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
