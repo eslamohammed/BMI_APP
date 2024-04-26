@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:ibm_task/presentation/register/register_view.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
+import 'package:ibm_task/presentation/utils/strings_manager.dart';
 import 'package:ibm_task/widget/form_container_widget.dart';
 
-
+import '../../widget/custom_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,14 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   // bool _isSigning = false;
 
   // final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -31,13 +28,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Login"),
-      // ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -45,86 +38,85 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Login",
-                style: TextStyle(color: ColorManager.darkPrimary,fontSize: 27, fontWeight: FontWeight.bold),
+                AppStrings.login,
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge
+                    ?.copyWith(color: ColorManager.darkBlue),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
                 controller: _emailController,
-                hintText: "Email",
+                hintText: AppStrings.email,
                 isPasswordField: false,
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               FormContainerWidget(
                 controller: _passwordController,
-                hintText: "Password",
+                hintText: AppStrings.password,
                 isPasswordField: true,
               ),
-              SizedBox(height: 30,),
-              GestureDetector(
-                // onTap: _signIn,
-                onTap: (){
-                  print("fill the fire base login in part");
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: ColorManager.darkPrimary,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(child:Text("Login",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                ),
+              const SizedBox(
+                height: 30,
               ),
-              SizedBox(height: 20,),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              CustomButton(
+                label: AppStrings.login,
+                callbackAction: () {},
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
-                  SizedBox(width: 5,),
+                  const Text(AppStrings.notMemberSignUp),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).pushReplacementNamed(Routes.registerRoute);
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.registerRoute);
                       },
-                      child: Text("Sign Up",style: TextStyle(color: ColorManager.darkPrimary,fontWeight: FontWeight.bold),))
+                      child: Text(
+                        AppStrings.signup,
+                        style: TextStyle(
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ))
                 ],
               ),
-              SizedBox(height: 20,),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Go directly to app Main screen"),
-                  SizedBox(width: 5,),
+                  const Text("Go directly to app Main screen"),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.mainScreen);
                       },
-                      child: Text("Main Screen",style: TextStyle(color: ColorManager.darkPrimary,fontWeight: FontWeight.bold),))
+                      child: Text(
+                        "Main Screen",
+                        style: TextStyle(
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ))
                 ],
               )
-
-
             ],
           ),
         ),
       ),
     );
   }
-
-  // void _signIn() async {
-
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
-
-  //   User? user = await _auth.signInWithEmailAndPassword(email, password);
-
-  //   if (user!= null){
-  //     print("User is successfully signedIn");
-  //     // Navigator.pushNamed(context, "/home");
-  //      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>HomeScreen()));
-  //   } else{
-  //     print("Some error happend");
-  //   }
-
-  // }
 }

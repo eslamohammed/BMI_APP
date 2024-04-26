@@ -12,11 +12,11 @@ class OnboardingViewModel extends BaseViewModel
       StreamController<OnboardingSliderViewObject>();
   late final List<OnboardingSlider> _list;
 
-  late int _currentPage ;
+  late int _currentPage;
 
   @override
   void onStart() {
-    _currentPage=0;
+    _currentPage = 0;
     _list = _getSliderData();
     _postDataToView();
   }
@@ -55,8 +55,6 @@ class OnboardingViewModel extends BaseViewModel
           AssetsManager.onBoarding2),
       OnboardingSlider(AppStrings.onBoardingHeader3, AppStrings.onBoardingBody3,
           AssetsManager.onBoarding3),
-      OnboardingSlider(AppStrings.onBoardingHeader4, AppStrings.onBoardingBody4,
-          AssetsManager.onBoarding4),
     ];
   }
 }

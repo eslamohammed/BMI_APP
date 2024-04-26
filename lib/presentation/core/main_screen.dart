@@ -1,13 +1,17 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
-import 'container_box.dart';
-import 'data_container.dart';
+import 'package:ibm_task/presentation/utils/strings_manager.dart';
+import 'package:ibm_task/presentation/utils/values_manager.dart';
+import 'package:ibm_task/widget/custom_button.dart';
+import '../../widget/container_box.dart';
+import '../../widget/data_container.dart';
 
 // final activeColor = Colors.cyan.shade800;
-final activeColor = ColorManager.darkPrimary;
+final activeColor = ColorManager.primary;
 const inActiveColor = Color(0xFF212121);
 // final inActiveColor = ColorManager.darkGrey;
 
@@ -21,9 +25,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   Color maleBoxColor = activeColor;
   Color femaleBoxColor = inActiveColor;
-  int height = 180;
-  int weight = 70;
-  int age = 25;
+  int height = AppSize.s180 as int;
+  int weight = AppSize.s70 as int;
+  int age = AppSize.s20 as int;
   String result = "";
   String resultDetail = "";
   double bmi = 0;
@@ -49,8 +53,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   String calculateBmi(int weight, int height) {
-    bmi = weight / pow(height / 100, 2);
-    return bmi.toStringAsFixed(1);
+    bmi = weight / pow(height / AppSize.s180, AppSize.s2);
+    return bmi.toStringAsFixed(AppSize.s1 as int);
   }
 
   String getInterpretation(double bmi) {
@@ -81,8 +85,8 @@ class _MainScreenState extends State<MainScreen> {
                   },
                   child: ContainerBox(
                     boxColor: maleBoxColor,
-                    childWidget: DataContainer(
-                        icon: FontAwesomeIcons.mars, title: "MALE"),
+                    childWidget: const DataContainer(
+                        icon: FontAwesomeIcons.mars, title: AppStrings.male),
                   ),
                 ),
               ),
@@ -95,8 +99,8 @@ class _MainScreenState extends State<MainScreen> {
                   },
                   child: ContainerBox(
                       boxColor: femaleBoxColor,
-                      childWidget: DataContainer(
-                          icon: FontAwesomeIcons.venus, title: "FEMALE")),
+                      childWidget: const DataContainer(
+                          icon: FontAwesomeIcons.venus, title:AppStrings.female)),
                 ),
               ),
             ],
@@ -107,14 +111,14 @@ class _MainScreenState extends State<MainScreen> {
               childWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text("HEIGHT", style: textStyle1),
+                  const Text(AppStrings.height, style: textStyle1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(height.toString(), style: textStyle2),
-                      const Text("cm", style: textStyle1),
+                      const Text(AppStrings.cm, style: textStyle1),
                     ],
                   ),
                   Slider(
@@ -134,7 +138,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           Expanded(
-            child: Row(
+              child: Row(
             children: <Widget>[
               Expanded(
                 child: ContainerBox(
@@ -142,7 +146,7 @@ class _MainScreenState extends State<MainScreen> {
                     childWidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const Text("WEIGHT", style: textStyle1),
+                        const Text(AppStrings.weight, style: textStyle1),
                         Text(weight.toString(), style: textStyle2),
                         const SizedBox(
                           height: 5.0,
@@ -183,7 +187,7 @@ class _MainScreenState extends State<MainScreen> {
                     childWidget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        const Text("AGE", style: textStyle1),
+                        const Text(AppStrings.age, style: textStyle1),
                         Text(age.toString(), style: textStyle2),
                         const SizedBox(
                           height: 5.0,
@@ -220,75 +224,27 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ],
           )),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("To view your BMI History"),
-                  const SizedBox(width: 5,),
-                  GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).pushReplacementNamed(Routes.historyPage);
-                      },
-                      child: Text("History",style: TextStyle(color: ColorManager.darkPrimary,fontWeight: FontWeight.bold),))
-                ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("To view your BMI History"),
+              const SizedBox(
+                width: 5,
               ),
-          GestureDetector(
-              onTap: () {
-                setState(() {
-                  result = calculateBmi(weight, height);
-                  resultDetail = getInterpretation(bmi);
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Dialog(
-                          backgroundColor: inActiveColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Container(
-                            color: inActiveColor,
-                            height: 200.0,
-                            margin: const EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                const Text(
-                                  "Result",
-                                  style: textStyle1,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      top: 5.0, bottom: 5.0),
-                                  child: Text(
-                                    result.toString(),
-                                    style: textStyle2,
-                                  ),
-                                ),
-                                Text(
-                                  resultDetail,
-                                  style: textStyle1,
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      });
-                });
-              },
-              child: Container(
-                child: const Center(
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.historyPage);
+                  },
                   child: Text(
-                    "Calculate",
-                    style: textStyle3,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: activeColor,
-                ),
-                width: 356.0,
-                height: 60.0,
-                margin: const EdgeInsets.only(bottom: 15.0, top: 10.0),
-              ))
+                    AppStrings.history,
+                    style: TextStyle(
+                        color: ColorManager.primary,
+                        fontWeight: FontWeight.bold),
+                  ))
+            ],
+          ),
+          Container(margin:EdgeInsets.all(AppMargin.m16),child: CustomButton(label: AppStrings.calculate, callbackAction: () {}))
         ],
       ),
     );
