@@ -1,46 +1,110 @@
 import 'package:flutter/material.dart';
 
-import 'font_manager.dart';
 
-TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
-  return TextStyle(
-      fontSize: fontSize,
-      fontFamily: FontConstants.fontFamily,
-      color: color,
-      fontWeight: fontWeight);
-}
+TextStyle get headline1 => const TextStyle(
+  fontSize: 30,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 38.99 / 30,
+  letterSpacing: 0.2,
+);
 
-// regular style
+TextStyle get headline2 => const TextStyle(
+  fontSize: 20,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 25.99 / 20,
+  letterSpacing: 1.2,
+);
 
-TextStyle getRegularStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
-  return _getTextStyle(fontSize, FontWeightManager.regular, color);
-}
+TextStyle get headline3 => const TextStyle(
+  fontSize: 16,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 24 / 16,
+  letterSpacing: 0,
+);
 
-// medium style
+TextStyle get bodyText1 => const TextStyle(
+  fontSize: 16,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w400,
+  height: 24 / 16,
+  letterSpacing: 1.2,
+);
 
-TextStyle getMediumStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
-  return _getTextStyle(fontSize, FontWeightManager.medium, color);
-}
+TextStyle get bodyText1Bold => const TextStyle(
+  fontSize: 16,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 24 / 16,
+  letterSpacing: 1.2,
+);
 
-// medium style
+TextStyle get bodyText2 => const TextStyle(
+  fontSize: 14,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w400,
+  height: 21 / 14,
+  letterSpacing: 1.2,
+);
 
-TextStyle getLightStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
-  return _getTextStyle(fontSize, FontWeightManager.light, color);
-}
+TextStyle get bodyText2Bold => const TextStyle(
+  fontSize: 14,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 21 / 14,
+  letterSpacing: 1.2,
+);
 
-// bold style
+TextStyle get bodyText3 => const TextStyle(
+  fontSize: 12,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w500,
+  height: 18 / 12,
+  letterSpacing: 1.2,
+);
 
-TextStyle getBoldStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
-  return _getTextStyle(fontSize, FontWeightManager.bold, color);
-}
+TextStyle get bodyText3Bold => const TextStyle(
+  fontSize: 12,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 18 / 12,
+  letterSpacing: 1.2,
+);
 
-// semibold style
+TextStyle get buttonText1 => const TextStyle(
+  fontSize: 16,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w600,
+  height: 24 / 16,
+  letterSpacing: 1.2,
+);
 
-TextStyle getSemiBoldStyle(
-    {double fontSize = FontSize.s12, required Color color}) {
-  return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
-}
+TextStyle get buttonText2 => const TextStyle(
+  fontSize: 12,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w600,
+  height: 15.59 / 12,
+  letterSpacing: 1.2,
+);
+
+TextStyle get percentages => const TextStyle(
+  fontSize: 10,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w600,
+  height: 10 / 10,
+  letterSpacing: 0.2,
+);

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ibm_task/presentation/utils/app_constants.dart';
 import 'package:ibm_task/presentation/utils/assets_manager.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
@@ -27,7 +28,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: ColorManager.primary,
+        backgroundColor: ColorManager.white,
         body: Center(
           child: AnimatedBuilder(
               animation: _animationController,
@@ -35,7 +36,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                 return RotationTransition(
                   turns:
                       Tween(begin: 0.0, end: 1.0).animate(_animationController),
-                  child: Image.asset(
+                  child: SvgPicture.asset(
                     AssetsManager.splashLogo,
                     width: (size.height > size.width)
                         ? size.width * 0.4

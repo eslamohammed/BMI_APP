@@ -1,20 +1,28 @@
 class AppStrings {
   static const noRouteFound = "No Route Found";
-  static const onBoardingHeader1 = "SEE THE BEST COURSE #1 ";
+  static const onBoardingHeader1 = "Keep calm and stay in control ";
   static const onBoardingBody1 =
-      "Tut app is an awesome flutter application using clean architecture #1";
-  static const onBoardingHeader2 = "SEE THE BEST COURSE #2 ";
+      "You can check your health with just one\nlook.";
+  static const onBoardingHeader2 = "Exercise more \n& breathe better";
   static const onBoardingBody2 =
-      "Tut app is an awesome flutter application using clean architecture #2";
-  static const onBoardingHeader3 = "SEE THE BEST COURSE #3";
-  static const onBoardingBody3 =
-      "Tut app is an awesome flutter application using clean architecture #3";
-  static const onBoardingHeader4 = "SEE THE BEST COURSE #4";
-  static const onBoardingBody4 =
-      "Tut app is an awesome flutter application using clean architecture #4";
+      "Learn, measure, set daily goals.";
+  static const onBoardingHeader3 = "Just take a look and take action!";
+  static const onBoardingBody3 = "Keep Calm and lets start.";
   static const login = "Login";
   static const skip = "Skip";
   static const getStart = "Get started";
-  static const notMemberSignUp = "Not a member ? Sign up";
+  static const notMemberSignUp = "Not a member ?";
+  static const signup = " Sign up";
   static const forgetPassword = "Forget password";
+  static const password = "Password";
+  static const email = "Email";
+  static const calculate = "Calculate";
+  static const history = "History";
+  static const age = "Age";
+  static const height = "Height";
+  static const weight = "Weight";
+  static const male = "Male";
+  static const female = "female";
+  static const cm = "cm";
+
 }

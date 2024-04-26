@@ -6,6 +6,7 @@ import 'package:ibm_task/presentation/utils/app_constants.dart';
 import 'package:ibm_task/presentation/utils/assets_manager.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/strings_manager.dart';
+import 'package:ibm_task/presentation/utils/styles_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 
 import '../../domain/model/onboarding_slider.dart';
@@ -20,7 +21,7 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController pageController = PageController();
-  OnboardingViewModel _viewModel = OnboardingViewModel();
+  final OnboardingViewModel _viewModel = OnboardingViewModel();
 
   _binding() {
     _viewModel.onStart();
@@ -43,34 +44,38 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return StreamBuilder<OnboardingSliderViewObject>(
         stream: _viewModel.outputSliderViewObject,
         builder: (context, snapshot) {
-          return _getContentWidget(snapshot.data);
+          if (snapshot.data != null) {
+            return _getContentWidget(snapshot.data!);
+          } else {
+            return Container();
+          }
         });
   }
 
-  Widget _getContentWidget(OnboardingSliderViewObject? data) {
+  Widget _getContentWidget(OnboardingSliderViewObject data) {
     return Scaffold(
-      backgroundColor: ColorManager.white,
+      backgroundColor: ColorManager.lightPrimary,
       appBar: AppBar(
-        backgroundColor: ColorManager.white,
+        backgroundColor: ColorManager.lightPrimary,
         elevation: AppSize.s0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ColorManager.white,
-            statusBarBrightness: Brightness.dark),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: ColorManager.lightPrimary,
+            statusBarBrightness: Brightness.light),
       ),
       body: PageView.builder(
         controller: pageController,
-        itemCount: data?.pageCount,
+        itemCount: data.pageCount,
         onPageChanged: (index) {
           _viewModel.onPageChanged(index);
         },
         itemBuilder: (context, index) {
           return OnboardingPage(
-            onboardingSlider: data!.onboardingSlider,
+            onboardingSlider: data.onboardingSlider,
           );
         },
       ),
       bottomSheet: Container(
-        color: ColorManager.white,
+        color: ColorManager.lightPrimary,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -83,14 +88,14 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     Navigator.of(context)
                         .pushReplacementNamed(Routes.loginRoute);
                   },
-                  child: const Text(
+                  child:  Text(
                     AppStrings.skip,
                     textAlign: TextAlign.end,
+                    style: buttonText2.copyWith(color: ColorManager.primary),
                   ),
                 ),
               ),
             ),
-            if(data !=null)
             _getBottomSheetWidget(data)
           ],
         ),
@@ -100,7 +105,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Widget _getBottomSheetWidget(OnboardingSliderViewObject? data) {
     return Container(
-      decoration: BoxDecoration(color: ColorManager.primary),
+      decoration: const BoxDecoration(color: ColorManager.lightPrimary),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -183,15 +188,7 @@ class OnboardingPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
           child: Text(
             onboardingSlider.header,
-            style: Theme.of(context).textTheme.displayLarge,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(AppPadding.p16),
-          child: Text(
-            onboardingSlider.body,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style:headline1.copyWith(color: ColorManager.deepBlue),
             textAlign: TextAlign.center,
           ),
         ),
@@ -200,7 +197,15 @@ class OnboardingPage extends StatelessWidget {
         ),
         SvgPicture.asset(
           onboardingSlider.imagePath,
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p16),
+          child: Text(
+            onboardingSlider.body,
+            style:bodyText1.copyWith(color: ColorManager.coldGrey),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ],
     );
   }

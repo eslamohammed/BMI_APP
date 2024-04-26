@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
 import 'package:ibm_task/widget/form_container_widget.dart';
+
+import '../../widget/custom_button.dart';
+import '../login/login_view.dart';
+import '../utils/strings_manager.dart';
 // import 'package:quiz_app/screens/home_screen.dart';
 
 // import 'package:ibm_task/screens/login_page.dart';
@@ -50,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               Text(
                 "Sign Up",
-                style: TextStyle(color: ColorManager.darkPrimary,fontSize: 27, fontWeight: FontWeight.bold),
+                style: TextStyle(color: ColorManager.primary,fontSize: 27, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 30,
@@ -79,35 +83,19 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: 30,
               ),
-              GestureDetector(
-                // onTap: _signUp,
-                onTap: () {
-                  print("fill the fire base sgin up part");
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    color: ColorManager.darkPrimary,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
-                ),
+              CustomButton(label: AppStrings.signup,
+                callbackAction: () {},
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Already have an account?"),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
                       },
-                      child: Text("Login", style: TextStyle(color:ColorManager.darkPrimary, fontWeight: FontWeight.bold),))
+                      child: Text("Login", style: TextStyle(color:ColorManager.primary, fontWeight: FontWeight.bold),))
                 ],
               )
             ],
