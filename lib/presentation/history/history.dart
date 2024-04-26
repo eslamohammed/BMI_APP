@@ -20,7 +20,7 @@ var historyList = [
   // History(height: 180, weight: 65, gender: 'male', age: 25, bmiStatus: '${65/(1.8*1.8)}',),
   // History(height: 180, weight: 90, gender: 'male', age: 25, bmiStatus: '${90/(1.8*1.8)}',),
   // History(height: 180, weight: 75, gender: 'male', age: 25, bmiStatus: '${75/(1.8*1.8)}',),
-  const History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: '${80/(1.8*1.8)}',),
+
 ];
 
 class _HistoryPageState extends State<HistoryPage> {
@@ -47,9 +47,13 @@ class _HistoryPageState extends State<HistoryPage> {
               ))),
       backgroundColor: ColorManager.white,
       body: ListView.builder(
-          itemCount: historyList.length,
+          itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
-            return historyList[index];
+            return History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: 80/(1.8*1.8), onDismiss: (DismissDirection direction) {
+              if(direction==DismissDirection.endToStart){
+                // list.removeAt(index);
+              }
+            }, index: 0,);
           }),
     );
   }
