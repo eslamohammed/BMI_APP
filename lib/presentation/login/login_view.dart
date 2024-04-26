@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomButton(
                 label: AppStrings.login,
-                callbackAction: () {},
+                onClick: () {},
               ),
               const SizedBox(
                 height: 20,
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Go directly to app Main screen"),
+                  const Text("Soft login"),
                   const SizedBox(
                     width: 5,
                   ),
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             .pushReplacementNamed(Routes.mainScreen);
                       },
                       child: Text(
-                        "Main Screen",
+                        "Lets go!",
                         style: TextStyle(
                             color: ColorManager.primary,
                             fontWeight: FontWeight.bold),

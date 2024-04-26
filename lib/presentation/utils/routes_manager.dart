@@ -1,17 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:ibm_task/presentation/core/main_screen.dart';
 import 'package:ibm_task/presentation/history/history.dart';
 import 'package:ibm_task/presentation/login/login_view.dart';
 import 'package:ibm_task/presentation/register/register_view.dart';
 import 'package:ibm_task/presentation/utils/strings_manager.dart';
-
-// import '../login/login_view.dart';
-// import '../main/main_view.dart';
+import '../main/main_screen.dart';
 import '../onboarding/onboarding_view.dart';
-// import '../register/register_view.dart';
 import '../splash/splash_view.dart';
-// import '../store_details/store_details_view.dart';
 import 'color_manager.dart';
 
 class Routes {
@@ -41,12 +36,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case Routes.historyPage:
         return MaterialPageRoute(builder: (_) => const HistoryPage());
-      // case Routes.forgotPasswordRoute:
-      //   return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
-      // case Routes.mainRoute:
-      //   return MaterialPageRoute(builder: (_) => const MainView());
-      // case Routes.storeDetailsRoute:
-      //   return MaterialPageRoute(builder: (_) => const StoreDetailsView());
       default:
         return unDefinedRoute();
     }
@@ -59,7 +48,7 @@ class RouteGenerator {
                 title: const Text(AppStrings.noRouteFound),
                 elevation: 1,
               ),
-              body: Center(
+              body: const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -68,7 +57,7 @@ class RouteGenerator {
                       size: 25.0,
                       color: ColorManager.error,
                     ),
-                    const Text(
+                    Text(
                       AppStrings.noRouteFound,
                     ),
                   ],

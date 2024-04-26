@@ -22,7 +22,8 @@ class AppStrings {
   static const height = "Height";
   static const weight = "Weight";
   static const male = "Male";
-  static const female = "female";
+  static const female = "Female";
   static const cm = "cm";
+  static const mainTitle = "BMI Calculator 📏";
 
 }

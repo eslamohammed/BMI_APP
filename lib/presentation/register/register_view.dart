@@ -84,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 30,
               ),
               CustomButton(label: AppStrings.signup,
-                callbackAction: () {},
+                onClick: () {},
               ),
               const SizedBox(height: 20,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
