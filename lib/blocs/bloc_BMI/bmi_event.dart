@@ -1,34 +1,51 @@
 part of 'bmi_bloc.dart';
 
+abstract class BmiEvent {}
 
-abstract class BmiEvent extends Equatable {
-  const BmiEvent();
+class BmiInitialEvent extends BmiEvent {
+  final String gander;
+  final double age;
+  final double hight;
+  final double weight;
+  final double bmi;
 
-  @override
-  List<Object> get props => [];
+  BmiInitialEvent({
+    required this.gander, 
+    required this.age, 
+    required this.hight, 
+    required this.weight, 
+    required this.bmi});
 }
 
-class  AddBmi extends BmiEvent{
-  final Bmi bmi;
-  const AddBmi(this.bmi);
 
-  @override
-  List<Object> get props => [bmi]; 
-}
+// abstract class BmiEvent extends Equatable {
+//   const BmiEvent();
 
-class  UpdateBmi extends BmiEvent{
-  final Bmi bmi;
-  const UpdateBmi(this.bmi);
+//   @override
+//   List<Object> get props => [];
+// }
 
-  @override
-  List<Object> get props => [bmi]; 
-}
+// class  AddBmi extends BmiEvent{
+//   final Bmi bmi;
+//   const AddBmi(this.bmi);
 
-class  DeleteBmi extends BmiEvent{
-  final Bmi bmi;
-  const DeleteBmi(this.bmi);
+//   @override
+//   List<Object> get props => [bmi]; 
+// }
 
-  @override
-  List<Object> get props => [bmi]; 
-}
+// class  UpdateBmi extends BmiEvent{
+//   final Bmi bmi;
+//   const UpdateBmi(this.bmi);
+
+//   @override
+//   List<Object> get props => [bmi]; 
+// }
+
+// class  DeleteBmi extends BmiEvent{
+//   final Bmi bmi;
+//   const DeleteBmi(this.bmi);
+
+//   @override
+//   List<Object> get props => [bmi]; 
+// }
 
