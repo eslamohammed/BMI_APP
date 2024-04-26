@@ -17,16 +17,16 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        return throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for IOS '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,19 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB2Xb_1LDTyzp4FrI6FnISDKdwkF0nWA5o',
-    appId: '1:823635999092:android:c24331eef321d10ee55421',
-    messagingSenderId: '823635999092',
-    projectId: 'foody-flutter-d67ec',
-    storageBucket: 'foody-flutter-d67ec.appspot.com',
+    apiKey: 'AIzaSyCrGcdvOp0czZaaXGyWpiGKVpV7y3sGe9M',
+    appId: '1:697193972484:android:9a38be7e16b4ea5cc48651',
+    messagingSenderId: '697193972484',
+    projectId: 'bmiapp-49203',
+    storageBucket: 'bmiapp-49203.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAQYpAwt30iH8S7bBnlKNCex43oJp6kmWg',
-    appId: '1:823635999092:ios:80b3b48e78a47772e55421',
-    messagingSenderId: '823635999092',
-    projectId: 'foody-flutter-d67ec',
-    storageBucket: 'foody-flutter-d67ec.appspot.com',
-    iosBundleId: 'com.codebook.simpleChatFlutter',
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyApOfc6R6rXLJOMJMvn0NQtITquxr6dw6M',
+    appId: '1:697193972484:android:9a38be7e16b4ea5cc48651',
+    messagingSenderId: '697193972484',
+    projectId: 'bmiapp-49203',
+    storageBucket: 'bmiapp-49203.appspot.com',
   );
 }
