@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -55,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   String calculateBmi(int weight, int height) {
-    bmi = weight / pow(height / 180, 2);
+    bmi = weight / pow(height / 100, 2);
     return bmi.toStringAsFixed(1);
   }
 
@@ -287,8 +288,13 @@ class _MainScreenState extends State<MainScreen> {
                                     BorderRadius.circular(AppSize.s16),
                               ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
+                                  const SizedBox(
+                                    height: AppMargin.m30,
+                                  ),
                                   SfRadialGauge(
                                       title: const GaugeTitle(
                                           text: 'BMI',
@@ -358,13 +364,18 @@ class _MainScreenState extends State<MainScreen> {
                                                   startWidth: 10,
                                                   endWidth: 10),
                                             ],
-                                            pointers: const <GaugePointer>[
-                                              NeedlePointer(value: 18)
+                                            pointers: <GaugePointer>[
+                                              NeedlePointer(
+                                                value: bmi,
+                                                // needleEndWidth: 2,
+                                                needleStartWidth: 2,
+                                              )
                                             ],
-                                            annotations: const <GaugeAnnotation>[
+                                            annotations: <GaugeAnnotation>[
                                               GaugeAnnotation(
-                                                  widget: Text('BMI = ',
-                                                      style: TextStyle(
+                                                  widget: Text(
+                                                      'BMI = ${result}',
+                                                      style: const TextStyle(
                                                           fontSize: 25,
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -372,18 +383,14 @@ class _MainScreenState extends State<MainScreen> {
                                                   positionFactor: 0.5)
                                             ])
                                       ]),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                        top: 5.0, bottom: 5.0),
-                                    child: Text(
-                                      result.toString(),
-                                      style: bodyText2,
-                                    ),
-                                  ),
                                   Text(
                                     resultDetail,
-                                    style: bodyText2,
-                                  )
+                                    style: headline3,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(
+                                    height: AppMargin.m30,
+                                  ),
                                 ],
                               ),
                             );
