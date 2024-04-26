@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
+import 'package:ibm_task/presentation/utils/values_manager.dart';
 
 class History extends StatelessWidget {
   final double height;
@@ -28,11 +29,15 @@ class History extends StatelessWidget {
       onDismissed: onDismiss,
       background: Container(
         color: ColorManager.error,
-        child: Align(
-          child: const Icon(
-            FontAwesomeIcons.deleteLeft,
-          ),
+        child:  const Align(
           alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppPadding.p16),
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
       key: ValueKey<int>(index),
