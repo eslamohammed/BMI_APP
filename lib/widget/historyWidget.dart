@@ -4,8 +4,8 @@ import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 
 class History extends StatelessWidget {
-  final double height;
-  final double weight;
+  final int height;
+  final int weight;
   final int age;
   final String gender;
   final double bmiStatus;

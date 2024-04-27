@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/history/history.dart';
 import 'package:ibm_task/presentation/login/login_view.dart';
@@ -35,7 +34,7 @@ class RouteGenerator {
       case Routes.mainScreen:
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case Routes.historyPage:
-        return MaterialPageRoute(builder: (_) => const HistoryPage());
+        return MaterialPageRoute(builder: (_) =>  HistoryPage());
       default:
         return unDefinedRoute();
     }

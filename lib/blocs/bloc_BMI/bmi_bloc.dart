@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
@@ -9,32 +8,33 @@ import 'package:ibm_task/blocs/repos/bmi_repo.dart';
 import '../../models/bmi.dart';
 
 part 'bmi_event.dart';
+
 part 'bmi_state.dart';
 
-class BmiBloc extends Bloc<BmiEvent,BmiState>{
+class BmiBloc extends Bloc<BmiEvent, BmiState> {
+  BmiBloc() : super(BmiInitial()) {
+    on<BmiInitialEvent>(bmiInitialAddBmi);
 
-  BmiBloc():super(BmiInitial()){
-
-   on<BmiInitialEvent>(bmiInitialAddBmi); 
-
-   on<BmiInitialEvent>(bmiInitialFetchBmi);
-
-   on<BmiInitialEvent>(bmiInitialDeleteBmi);
-
+    on<FetchBMIEvent>(bmiInitialFetchBmi);
+    //
+    // on<BmiInitialEvent>(bmiInitialDeleteBmi);
   }
-  //Post to firebase
-  FutureOr<void> bmiInitialAddBmi(BmiInitialEvent event, Emitter<BmiState> emit) async{
-    emit(BmiLoadingState());
-    
-    bool success = await BmiRepository().addToBmiList(
-      gander: event.gander, 
-      age: event.age, 
-      hight: event.hight, 
-      weight: event.weight, 
-      bmi: event.bmi
-    );
 
-    if(success){
+  List<BmiModel> bmiList = [];
+
+  //Post to firebase
+  FutureOr<void> bmiInitialAddBmi(
+      BmiInitialEvent event, Emitter<BmiState> emit) async {
+    emit(BmiLoadingState());
+
+    bool success = await BmiRepository().addToBmiList(
+        gander: event.gander,
+        age: event.age,
+        height: event.hight,
+        weight: event.weight,
+        bmi: event.bmi);
+
+    if (success) {
       emit((BmiAddSuccessfulState()));
     } else {
       emit(BmiErrorState());
@@ -42,35 +42,31 @@ class BmiBloc extends Bloc<BmiEvent,BmiState>{
   }
 
   //Get from firebase
-  Future<void> bmiInitialFetchBmi(BmiInitialEvent event, Emitter<BmiState> emit) async{
+  Future<void> bmiInitialFetchBmi(
+      FetchBMIEvent event, Emitter<BmiState> emit) async {
     emit(BmiLoadingState());
-
-    List <BmiModel> bmi_List =[];
-    try{
+    try {
       final bmi = await BmiRepository().fetchBmiList();
-        bmi.docs.forEach((element) {
-          return bmi_List.add(BmiModel.fromJson(element.data()));
-        });
-        if (bmi_List.isNotEmpty) {
-          emit(BmiFetchSuccessfulState(bmiList: bmi_List));    
-        }else{
-          emit(BmiEmptyState());
-        }
-      } on FirebaseException catch(e){
-        if(kDebugMode){
-        print("Faild with error ${e.code} ${e.message}");
-        }
-        emit(BmiErrorState());
+      for (var element in bmi.docs) {
+        bmiList.add(BmiModel.fromJson(element.data()));
       }
-      catch(e){
-        emit(BmiErrorState());
-        log(e.toString());
-      } 
-  }
-  //Delete from firebase
-  FutureOr<void> bmiInitialDeleteBmi(BmiInitialEvent event, Emitter<BmiState> emit) {
+      emit(BmiFetchSuccessfulState(bmiList: bmiList));
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("Failed with error ${e.code} ${e.message}");
+      }
+      emit(BmiErrorState());
+    } catch (e) {
+      emit(BmiErrorState());
+      log(e.toString());
+    }
   }
 }
+
+//   //Delete from firebase
+//   FutureOr<void> bmiInitialDeleteBmi(
+//       BmiInitialEvent event, Emitter<BmiState> emit) {}
+// }
 /*
 Future<void> bmiInitialFetchBmi(BmiInitialEvent event, Emitter<BmiState> emit) async{
     emit(BmiLoadingState());

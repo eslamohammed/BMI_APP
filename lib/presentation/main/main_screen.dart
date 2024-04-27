@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,8 +8,8 @@ import 'package:ibm_task/presentation/utils/strings_manager.dart';
 import 'package:ibm_task/presentation/utils/styles_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 import 'package:ibm_task/widget/custom_button.dart';
-import 'package:pretty_gauge/pretty_gauge.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import '../../blocs/bloc_exports.dart';
 import '../../widget/container_box.dart';
 import '../../widget/data_container.dart';
 
@@ -21,19 +20,23 @@ class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
+
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen>{
   Color maleBoxColor = activeColor;
   Color femaleBoxColor = inActiveColor;
   int height = 180;
   int weight = 70;
+  int gender = 1;
 
   int age = 20;
   String result = "";
   String resultDetail = "";
   double bmi = 0;
+
+
 
   void updateBoxColor(int gender) {
     if (gender == 1) {
@@ -89,35 +92,37 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           Expanded(
               child: Row(
-            children: <Widget>[
-              GenderContainerBox(
-                boxColor: maleBoxColor,
-                childWidget: DataContainer(
-                  icon: FontAwesomeIcons.mars,
-                  title: AppStrings.male,
-                  color: ColorManager.turquoise,
-                ),
-                onTap: () {
-                  setState(() {
-                    updateBoxColor(1);
-                  });
-                },
-              ),
-              GenderContainerBox(
-                boxColor: femaleBoxColor,
-                childWidget: DataContainer(
-                  icon: FontAwesomeIcons.venus,
-                  title: AppStrings.female,
-                  color: ColorManager.peach,
-                ),
-                onTap: () {
-                  setState(() {
-                    updateBoxColor(2);
-                  });
-                },
-              ),
-            ],
-          )),
+                children: <Widget>[
+                  GenderContainerBox(
+                    boxColor: maleBoxColor,
+                    childWidget: DataContainer(
+                      icon: FontAwesomeIcons.mars,
+                      title: AppStrings.male,
+                      color: ColorManager.turquoise,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        gender = 1;
+                        updateBoxColor(gender);
+                      });
+                    },
+                  ),
+                  GenderContainerBox(
+                    boxColor: femaleBoxColor,
+                    childWidget: DataContainer(
+                      icon: FontAwesomeIcons.venus,
+                      title: AppStrings.female,
+                      color: ColorManager.peach,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        gender = 2;
+                        updateBoxColor(gender);
+                      });
+                    },
+                  ),
+                ],
+              )),
           ContainerBox(
             boxColor: inActiveColor,
             childWidget: Column(
@@ -132,10 +137,10 @@ class _MainScreenState extends State<MainScreen> {
                   children: <Widget>[
                     Text(height.toString(),
                         style:
-                            headline1.copyWith(color: ColorManager.deepBlue)),
+                        headline1.copyWith(color: ColorManager.deepBlue)),
                     Text(AppStrings.cm,
                         style:
-                            bodyText2.copyWith(color: ColorManager.deepBlue)),
+                        bodyText2.copyWith(color: ColorManager.deepBlue)),
                   ],
                 ),
                 Slider(
@@ -156,99 +161,99 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Expanded(
               child: Row(
-            children: <Widget>[
-              Expanded(
-                child: ContainerBox(
-                    boxColor: inActiveColor,
-                    childWidget: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(AppStrings.weight,
-                            style: bodyText2.copyWith(
-                                color: ColorManager.deepBlue)),
-                        Text(weight.toString(),
-                            style: headline1.copyWith(
-                                color: ColorManager.deepBlue)),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
+                children: <Widget>[
+                  Expanded(
+                    child: ContainerBox(
+                        boxColor: inActiveColor,
+                        childWidget: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            FloatingActionButton(
-                              backgroundColor: activeColor,
-                              child: const Icon(FontAwesomeIcons.plus,
-                                  color: Colors.white),
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
+                            Text(AppStrings.weight,
+                                style: bodyText2.copyWith(
+                                    color: ColorManager.deepBlue)),
+                            Text(weight.toString(),
+                                style: headline1.copyWith(
+                                    color: ColorManager.deepBlue)),
+                            const SizedBox(
+                              height: 5.0,
                             ),
-                            const SizedBox(width: 10.0),
-                            FloatingActionButton(
-                                backgroundColor: activeColor,
-                                child: const Icon(FontAwesomeIcons.minus,
-                                    color: Colors.white),
-                                onPressed: () {
-                                  setState(() {
-                                    if (weight > 1) {
-                                      weight--;
-                                    }
-                                  });
-                                })
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FloatingActionButton(
+                                  backgroundColor: activeColor,
+                                  child: const Icon(FontAwesomeIcons.plus,
+                                      color: Colors.white),
+                                  onPressed: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(width: 10.0),
+                                FloatingActionButton(
+                                    backgroundColor: activeColor,
+                                    child: const Icon(FontAwesomeIcons.minus,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (weight > 1) {
+                                          weight--;
+                                        }
+                                      });
+                                    })
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    )),
-              ),
-              Expanded(
-                child: ContainerBox(
-                    boxColor: inActiveColor,
-                    childWidget: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(AppStrings.age,
-                            style: bodyText2.copyWith(
-                                color: ColorManager.deepBlue)),
-                        Text(age.toString(),
-                            style: headline1.copyWith(
-                                color: ColorManager.deepBlue)),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
+                        )),
+                  ),
+                  Expanded(
+                    child: ContainerBox(
+                        boxColor: inActiveColor,
+                        childWidget: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            FloatingActionButton(
-                              backgroundColor: activeColor,
-                              child: const Icon(FontAwesomeIcons.plus,
-                                  color: Colors.white),
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
+                            Text(AppStrings.age,
+                                style: bodyText2.copyWith(
+                                    color: ColorManager.deepBlue)),
+                            Text(age.toString(),
+                                style: headline1.copyWith(
+                                    color: ColorManager.deepBlue)),
+                            const SizedBox(
+                              height: 5.0,
                             ),
-                            const SizedBox(width: 10.0),
-                            FloatingActionButton(
-                                backgroundColor: activeColor,
-                                child: const Icon(FontAwesomeIcons.minus,
-                                    color: Colors.white),
-                                onPressed: () {
-                                  setState(() {
-                                    if (age > 1) {
-                                      age--;
-                                    }
-                                  });
-                                })
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FloatingActionButton(
+                                  backgroundColor: activeColor,
+                                  child: const Icon(FontAwesomeIcons.plus,
+                                      color: Colors.white),
+                                  onPressed: () {
+                                    setState(() {
+                                      age++;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(width: 10.0),
+                                FloatingActionButton(
+                                    backgroundColor: activeColor,
+                                    child: const Icon(FontAwesomeIcons.minus,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (age > 1) {
+                                          age--;
+                                        }
+                                      });
+                                    })
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    )),
-              ),
-            ],
-          )),
+                        )),
+                  ),
+                ],
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -258,6 +263,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               GestureDetector(
                   onTap: () {
+                    BlocProvider.of<BmiBloc>(context).add(FetchBMIEvent());
                     Navigator.of(context)
                         .pushReplacementNamed(Routes.historyPage);
                   },
@@ -272,133 +278,146 @@ class _MainScreenState extends State<MainScreen> {
           Container(
               margin: const EdgeInsets.all(AppMargin.m16),
               height: AppSize.s50,
-              child: CustomButton(
-                  label: AppStrings.calculate,
-                  onClick: () {
-                    setState(() {
-                      result = calculateBmi(weight, height);
-                      resultDetail = getInterpretation(bmi);
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Dialog(
-                              backgroundColor: ColorManager.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s16),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  const SizedBox(
-                                    height: AppMargin.m30,
-                                  ),
-                                  SfRadialGauge(
-                                      title: const GaugeTitle(
-                                          text: 'BMI',
-                                          textStyle: TextStyle(
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.bold)),
-                                      axes: <RadialAxis>[
-                                        RadialAxis(
-                                            minimum: 0,
-                                            maximum: 50,
-                                            startAngle: 180,
-                                            endAngle: 0,
-                                            radiusFactor: 0.90,
-                                            showAxisLine: false,
-                                            showLastLabel: true,
-                                            showLabels: true,
-                                            canRotateLabels: false,
-                                            ranges: <GaugeRange>[
-                                              GaugeRange(
-                                                startValue: 0,
-                                                endValue: 16,
-                                                color: Colors.red[700],
-                                                startWidth: 10,
-                                                endWidth: 10,
-                                              ),
-                                              GaugeRange(
-                                                startValue: 16,
-                                                endValue: 17,
-                                                color: Colors.red[300],
-                                                startWidth: 10,
-                                                endWidth: 10,
-                                              ),
-                                              GaugeRange(
-                                                  startValue: 17,
-                                                  endValue: 18.5,
-                                                  color: Colors.yellow,
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                              GaugeRange(
-                                                  startValue: 18.5,
-                                                  endValue: 25,
-                                                  color: Colors.green,
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                              GaugeRange(
-                                                  startValue: 25,
-                                                  endValue: 30,
-                                                  color: Colors.yellow,
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                              GaugeRange(
-                                                  startValue: 30,
-                                                  endValue: 35,
-                                                  color: Colors.red[300],
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                              GaugeRange(
-                                                  startValue: 35,
-                                                  endValue: 40,
-                                                  color: Colors.red[600],
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                              GaugeRange(
-                                                  startValue: 40,
-                                                  endValue: 50,
-                                                  color: Colors.red,
-                                                  startWidth: 10,
-                                                  endWidth: 10),
-                                            ],
-                                            pointers: <GaugePointer>[
-                                              NeedlePointer(
-                                                value: bmi,
-                                                // needleEndWidth: 2,
-                                                needleStartWidth: 2,
-                                              )
-                                            ],
-                                            annotations: <GaugeAnnotation>[
-                                              GaugeAnnotation(
-                                                  widget: Text(
-                                                      'BMI = ${result}',
-                                                      style: const TextStyle(
-                                                          fontSize: 25,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                  angle: 90,
-                                                  positionFactor: 0.5)
-                                            ])
-                                      ]),
-                                  Text(
-                                    resultDetail,
-                                    style: headline3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(
-                                    height: AppMargin.m30,
-                                  ),
-                                ],
-                              ),
-                            );
-                          });
-                    });
-                  }))
+              child: BlocConsumer<BmiBloc, BmiState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  return CustomButton(
+                      label: AppStrings.calculate,
+                      onClick: () {
+                        setState(() {
+                          result = calculateBmi(weight, height);
+                          resultDetail = getInterpretation(bmi);
+                          resultDialog(context);
+                        });
+                        BlocProvider.of<BmiBloc>(context).add(BmiInitialEvent(
+                            gander: gender,
+                            age: age,
+                            hight: height,
+                            weight: weight,
+                            bmi: bmi));
+                      });
+                },
+              ))
         ],
       ),
     );
+  }
+
+  void resultDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: ColorManager.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppSize.s16),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const SizedBox(
+                  height: AppMargin.m30,
+                ),
+                SfRadialGauge(
+                    title: const GaugeTitle(
+                        text: 'BMI',
+                        textStyle: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold)),
+                    axes: <RadialAxis>[
+                      RadialAxis(
+                          minimum: 0,
+                          maximum: 50,
+                          startAngle: 180,
+                          endAngle: 0,
+                          radiusFactor: 0.90,
+                          showAxisLine: false,
+                          showLastLabel: true,
+                          showLabels: true,
+                          canRotateLabels: false,
+                          ranges: <GaugeRange>[
+                            GaugeRange(
+                              startValue: 0,
+                              endValue: 16,
+                              color: Colors.red[700],
+                              startWidth: 10,
+                              endWidth: 10,
+                            ),
+                            GaugeRange(
+                              startValue: 16,
+                              endValue: 17,
+                              color: Colors.red[300],
+                              startWidth: 10,
+                              endWidth: 10,
+                            ),
+                            GaugeRange(
+                                startValue: 17,
+                                endValue: 18.5,
+                                color: Colors.yellow,
+                                startWidth: 10,
+                                endWidth: 10),
+                            GaugeRange(
+                                startValue: 18.5,
+                                endValue: 25,
+                                color: Colors.green,
+                                startWidth: 10,
+                                endWidth: 10),
+                            GaugeRange(
+                                startValue: 25,
+                                endValue: 30,
+                                color: Colors.yellow,
+                                startWidth: 10,
+                                endWidth: 10),
+                            GaugeRange(
+                                startValue: 30,
+                                endValue: 35,
+                                color: Colors.red[300],
+                                startWidth: 10,
+                                endWidth: 10),
+                            GaugeRange(
+                                startValue: 35,
+                                endValue: 40,
+                                color: Colors.red[600],
+                                startWidth: 10,
+                                endWidth: 10),
+                            GaugeRange(
+                                startValue: 40,
+                                endValue: 50,
+                                color: Colors.red,
+                                startWidth: 10,
+                                endWidth: 10),
+                          ],
+                          pointers: <GaugePointer>[
+                            NeedlePointer(
+                              value: bmi,
+                              // needleEndWidth: 2,
+                              needleStartWidth: 2,
+                            )
+                          ],
+                          annotations: <GaugeAnnotation>[
+                            GaugeAnnotation(
+                                widget: Text('BMI = ${result}',
+                                    style: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
+                                angle: 90,
+                                positionFactor: 0.5)
+                          ])
+                    ]),
+                Text(
+                  resultDetail,
+                  style: headline3,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: AppMargin.m30,
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

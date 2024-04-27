@@ -1,29 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ibm_task/models/bmi.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
 
+import '../../blocs/bloc_exports.dart';
 import '../../widget/historyWidget.dart';
 import '../utils/styles_manager.dart';
 import '../utils/values_manager.dart';
 
 // i will add bloc builder here to build firebase data
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+class HistoryPage extends StatelessWidget {
+   HistoryPage({super.key});
 
-  @override
-  State<HistoryPage> createState() => _HistoryPageState();
-}
+  final BmiBloc bmiBloc = BmiBloc()..add(FetchBMIEvent());
+  final List<BmiModel> list =[];
 
-var historyList = [
-  // History(height: 180, weight: 70, gender: 'male', age: 25, bmiStatus: '${70/(1.8*1.8)}',),
-  // History(height: 180, weight: 65, gender: 'male', age: 25, bmiStatus: '${65/(1.8*1.8)}',),
-  // History(height: 180, weight: 90, gender: 'male', age: 25, bmiStatus: '${90/(1.8*1.8)}',),
-  // History(height: 180, weight: 75, gender: 'male', age: 25, bmiStatus: '${75/(1.8*1.8)}',),
-
-];
-
-class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,15 +38,53 @@ class _HistoryPageState extends State<HistoryPage> {
                 color: ColorManager.deepBlue,
               ))),
       backgroundColor: ColorManager.white,
-      body: ListView.builder(
-          itemCount: 1,
-          itemBuilder: (BuildContext context, int index) {
-            return History(height: 180, weight: 80, gender: 'male', age: 25, bmiStatus: 80/(1.8*1.8), onDismiss: (DismissDirection direction) {
-              if(direction==DismissDirection.endToStart){
-                // list.removeAt(index);
-              }
-            }, index: 0,);
-          }),
+      body: BlocConsumer<BmiBloc, BmiState>(
+        bloc: bmiBloc,
+        builder: (context, state) {
+          print(state);
+          if (state is BmiFetchSuccessfulState) {
+            return ListView.builder(
+
+                itemCount: bmiBloc.bmiList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return History(
+                    height: bmiBloc.bmiList[index].height,
+                    weight: bmiBloc.bmiList[index].weight,
+                    gender:
+                    bmiBloc.bmiList[index].gander == 1 ? "Male" : "Female",
+                    age: bmiBloc.bmiList[index].age,
+                    bmiStatus: bmiBloc.bmiList[index].bmi,
+                    onDismiss: (DismissDirection direction) {
+                      if (direction == DismissDirection.endToStart) {
+                        bmiBloc.bmiList.removeAt(index);
+                        // DELETE EVENT
+                      }
+                    },
+                    index: index,
+                  );
+                });
+          } else if (state is BmiErrorState) {
+            return Center(
+              child: Text(
+                "Something went error!",
+                style: headline3.copyWith(color: ColorManager.error),
+              ),
+            );
+          } else if (state is BmiLoadingState|| state is BmiInitial) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: ColorManager.primary,
+            ));
+          } else {
+            return Center(
+              child: Text(
+                "No Data Found!",
+                style: headline3.copyWith(color: ColorManager.primary),
+              ),
+            );
+          }
+        }, listener: (BuildContext context, BmiState state) {  },
+      ),
     );
   }
 }

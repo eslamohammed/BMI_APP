@@ -3,10 +3,10 @@ part of 'bmi_bloc.dart';
 abstract class BmiEvent {}
 
 class BmiInitialEvent extends BmiEvent {
-  final String gander;
-  final double age;
-  final double hight;
-  final double weight;
+  final int gander;
+  final int age;
+  final int hight;
+  final int weight;
   final double bmi;
 
   BmiInitialEvent({
@@ -16,6 +16,7 @@ class BmiInitialEvent extends BmiEvent {
     required this.weight, 
     required this.bmi});
 }
+class FetchBMIEvent extends BmiEvent{}
 
 
 // abstract class BmiEvent extends Equatable {

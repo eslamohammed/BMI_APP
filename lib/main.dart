@@ -2,7 +2,6 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ibm_task/blocs/bloc_exports.dart';
 import 'package:ibm_task/firebase_options.dart';
 
 import 'app/app.dart';
@@ -13,7 +12,5 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-      BlocOverrides.runZoned(
-    () => runApp(MyApp()),
-  );
+  runApp(MyApp());
 }
