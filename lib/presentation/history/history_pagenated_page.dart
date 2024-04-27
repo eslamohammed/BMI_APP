@@ -1,5 +1,6 @@
 
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,7 @@ import 'package:ibm_task/widget/historyWidget.dart';
 class PaginatedHistoryPage extends StatelessWidget {
    PaginatedHistoryPage({super.key});
 
+  // ignore: non_constant_identifier_names
   final queryBmi_List = FirebaseFirestore.instance
   .collection('BMI_List')
   .orderBy('createdAt',descending:true)
@@ -62,18 +64,20 @@ class PaginatedHistoryPage extends StatelessWidget {
                 gender: snapshot.docs[index].data().gander == 1 ? "Male" : "Female",
                 age: snapshot.docs[index].data().age,
                 bmiStatus: snapshot.docs[index].data().bmi,
-                onDismiss: (DismissDirection direction) {
+                index: index,
+                onDismiss: (DismissDirection direction) async{
+                // DELETE 
                   if (direction == DismissDirection.endToStart) {
+                    await snapshot.docs[index].reference.delete();
                     snapshot.docs.removeAt(index);
-                    // DELETE EVENT
                   }
                 },
-                index: index,
+
               );
             }
           );
         },
-      )
+      ),
     );
   }
 }

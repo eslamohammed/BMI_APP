@@ -43,7 +43,8 @@ class History extends StatelessWidget {
           ),
         ),
       ),
-      key: ValueKey<int>(index),
+      // key: ValueKey<int>(index),
+      key: UniqueKey(),
       child: SizedBox(
         width: double.infinity,
         child: Card(
@@ -53,10 +54,6 @@ class History extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   'Created At: ${createdAt.toString()}',
-                //   style: TextStyle(fontSize: 16),
-                // ),
                 Text(
                   'Height: $height cm',
                   style: TextStyle(fontSize: 16),
