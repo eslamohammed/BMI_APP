@@ -255,31 +255,10 @@ class _MainScreenState extends State<MainScreen>{
                   ),
                 ],
               )),
-          Row(
+            Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("To view your BMI History"),
-              const SizedBox(
-                width: 5,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<BmiBloc>(context).add(FetchBMIEvent());
-                    Navigator.of(context)
-                        .pushReplacementNamed(Routes.historyPage);
-                  },
-                  child: Text(
-                    AppStrings.history,
-                    style: TextStyle(
-                        color: ColorManager.primary,
-                        fontWeight: FontWeight.bold),
-                  ))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("To view your BMI Paginated History screen"),
+              const Text("To view your BMI History [Paginated]"),
               const SizedBox(
                 width: 5,
               ),
@@ -290,7 +269,7 @@ class _MainScreenState extends State<MainScreen>{
                         .pushReplacementNamed(Routes.paginatedHistoryPage);
                   },
                   child: Text(
-                    "paginated history",
+                    AppStrings.history,
                     style: TextStyle(
                         color: ColorManager.primary,
                         fontWeight: FontWeight.bold),

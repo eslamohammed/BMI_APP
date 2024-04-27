@@ -17,7 +17,7 @@ class BmiEmptyState extends BmiState {}
 class BmiAddSuccessfulState extends BmiState {}
 
 class BmiFetchSuccessfulState extends BmiState {
-  List<BmiModel> bmiList;
+  final List<BmiModel> bmiList;
   BmiFetchSuccessfulState ({
     required this.bmiList,
   });

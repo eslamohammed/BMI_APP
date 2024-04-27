@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/history/history.dart';
+import 'package:ibm_task/presentation/history/history_pagenated_page.dart';
 import 'package:ibm_task/presentation/login/login_view.dart';
 import 'package:ibm_task/presentation/register/register_view.dart';
 import 'package:ibm_task/presentation/utils/strings_manager.dart';
@@ -37,7 +38,7 @@ class RouteGenerator {
       case Routes.historyPage:
         return MaterialPageRoute(builder: (_) =>  HistoryPage());
       case Routes.paginatedHistoryPage:
-        return MaterialPageRoute(builder: (_) =>  HistoryPage());
+        return MaterialPageRoute(builder: (_) =>  PaginatedHistoryPage());
       default:
         return unDefinedRoute();
     }
