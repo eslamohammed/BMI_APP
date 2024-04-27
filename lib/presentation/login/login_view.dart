@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
@@ -5,6 +6,7 @@ import 'package:ibm_task/presentation/utils/strings_manager.dart';
 import 'package:ibm_task/widget/form_container_widget.dart';
 
 import '../../widget/custom_button.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -112,7 +114,45 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold),
                       ))
                 ],
+              ),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("login & sign up doesn't work now"),
+                  const Text("\tLogin Anonymously"),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  GestureDetector(
+                      onTap: () async {
+                        try {
+                          final userCredential = await FirebaseAuth.instance.signInAnonymously();
+                          if(userCredential.user ==null){
+                             print("an error has been ouccer");
+                          }else{
+                            print(userCredential.user);
+                          Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
+                          }
+                        } on FirebaseAuthException catch (e) {
+                          switch (e.code) {
+                            case "operation-not-allowed":
+                              print("Anonymous auth hasn't been enabled for this project.");
+                              break;
+                            default:
+                              print("Unknown error.");
+                          }
+                        }
+                      },
+                      child: Text(
+                        "Lets go!",
+                        style: TextStyle(
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ))
+                ],
               )
+            
             ],
           ),
         ),

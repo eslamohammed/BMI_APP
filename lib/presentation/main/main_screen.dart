@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -87,6 +87,22 @@ class _MainScreenState extends State<MainScreen>{
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: ColorManager.lightPrimary,
             statusBarBrightness: Brightness.light),
+        actions: [
+          IconButton(
+              onPressed: () async{
+                try {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+                }catch(e){
+                  print(e.toString());
+                }
+              },
+              icon: const Icon(
+                Icons.logout_outlined,
+                color: ColorManager.deepBlue,
+              )
+            )
+          ],
       ),
       backgroundColor: ColorManager.white,
       body: Column(
