@@ -1,10 +1,5 @@
-
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:ibm_task/models/bmi.dart';
-
 class BmiRepository{
 
   final _fireCloud = FirebaseFirestore.instance.collection("BMI_List");
@@ -29,7 +24,7 @@ class BmiRepository{
       return true;
     } on FirebaseException catch(e){
       if(kDebugMode){
-        print("Faild with error ${e.code} ${e.message}");
+        print("Failed with error ${e.code} ${e.message}");
       }
       // return false;
     }
@@ -66,7 +61,7 @@ try{
 
       } on FirebaseException catch(e){
         if(kDebugMode){
-        print("Faild with error ${e.code} ${e.message}");
+        print("Failed with error ${e.code} ${e.message}");
         }
       }
       catch(e){
