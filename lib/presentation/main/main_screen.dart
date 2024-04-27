@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -275,6 +276,27 @@ class _MainScreenState extends State<MainScreen>{
                   ))
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("To view your BMI Paginated History screen"),
+              const SizedBox(
+                width: 5,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<BmiBloc>(context).add(FetchBMIEvent());
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.paginatedHistoryPage);
+                  },
+                  child: Text(
+                    "paginated history",
+                    style: TextStyle(
+                        color: ColorManager.primary,
+                        fontWeight: FontWeight.bold),
+                  ))
+            ],
+          ),
           Container(
               margin: const EdgeInsets.all(AppMargin.m16),
               height: AppSize.s50,
@@ -296,7 +318,9 @@ class _MainScreenState extends State<MainScreen>{
                             age: age,
                             hight: height,
                             weight: weight,
-                            bmi: bmi));
+                            bmi: bmi,
+                            // createdAt: DateTime.now()
+                            ));
                       });
                 },
               ))

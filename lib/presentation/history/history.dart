@@ -44,10 +44,10 @@ class HistoryPage extends StatelessWidget {
           print(state);
           if (state is BmiFetchSuccessfulState) {
             return ListView.builder(
-
                 itemCount: bmiBloc.bmiList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return History(
+                    // createdAt:bmiBloc.bmiList[index].createdAt,
                     height: bmiBloc.bmiList[index].height,
                     weight: bmiBloc.bmiList[index].weight,
                     gender:

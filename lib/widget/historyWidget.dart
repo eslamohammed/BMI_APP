@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
@@ -11,6 +12,8 @@ class History extends StatelessWidget {
   final double bmiStatus;
   final int index;
   final DismissDirectionCallback onDismiss;
+  // final DateTime createdAt;
+  // final Timestamp createdAt;
 
   const History({
     super.key,
@@ -18,9 +21,9 @@ class History extends StatelessWidget {
     required this.weight,
     required this.age,
     required this.gender,
-    required this.bmiStatus,
-    required this.onDismiss,
-    required this.index,
+    required this.bmiStatus, 
+    required this.onDismiss, required this.index,
+    // required this.index, required this.createdAt,
   });
 
   @override
@@ -50,6 +53,10 @@ class History extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Text(
+                //   'Created At: ${createdAt.toString()}',
+                //   style: TextStyle(fontSize: 16),
+                // ),
                 Text(
                   'Height: $height cm',
                   style: TextStyle(fontSize: 16),

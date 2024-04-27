@@ -8,13 +8,16 @@ class BmiInitialEvent extends BmiEvent {
   final int hight;
   final int weight;
   final double bmi;
+  // final Timestamp createdAt;
 
-  BmiInitialEvent({
+  BmiInitialEvent( {
     required this.gander, 
     required this.age, 
     required this.hight, 
     required this.weight, 
-    required this.bmi});
+    required this.bmi,
+    // required this.createdAt,
+    });
 }
 class FetchBMIEvent extends BmiEvent{}
 

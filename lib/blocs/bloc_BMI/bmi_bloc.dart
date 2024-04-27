@@ -32,7 +32,9 @@ class BmiBloc extends Bloc<BmiEvent, BmiState> {
         age: event.age,
         height: event.hight,
         weight: event.weight,
-        bmi: event.bmi);
+        bmi: event.bmi,
+        // createdAt:event.createdAt,
+        );
 
     if (success) {
       emit((BmiAddSuccessfulState()));

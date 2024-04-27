@@ -11,6 +11,9 @@ class BmiRepository{
       required int height,
       required int weight,
       required double bmi,
+      // required String createdAt,
+      // required Timestamp createdAt,
+      // required DateTime createdAt,
     }
   ) async{
     try{
@@ -20,6 +23,7 @@ class BmiRepository{
         "weight": weight,
         "age": age,
         "bmi": bmi,
+         "createdAt":DateTime.now(),
       });
       return true;
     } on FirebaseException catch(e){
@@ -39,7 +43,7 @@ class BmiRepository{
   //get 
   //Fetch bmi list
     Future<QuerySnapshot<Map<String, dynamic>>> fetchBmiList() async {
-        return await FirebaseFirestore.instance.collection("BMI_List").get();
+        return await FirebaseFirestore.instance.collection("BMI_List").orderBy('createdAt',descending:true).get();
 
         // bmi.docs.forEach((element) {
         //   return bmi_List.add(BmiModel.fromJson(element.data()));

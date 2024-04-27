@@ -18,6 +18,7 @@ class Routes {
   static const String storeDetailsRoute = "/storeDetails";
   static const String mainScreen = "/mainScreen";
   static const String historyPage = "/historyPage";
+  static const String paginatedHistoryPage = "/paginatedHistoryPage";
 }
 
 class RouteGenerator {
@@ -34,6 +35,8 @@ class RouteGenerator {
       case Routes.mainScreen:
         return MaterialPageRoute(builder: (_) => const MainScreen());
       case Routes.historyPage:
+        return MaterialPageRoute(builder: (_) =>  HistoryPage());
+      case Routes.paginatedHistoryPage:
         return MaterialPageRoute(builder: (_) =>  HistoryPage());
       default:
         return unDefinedRoute();
