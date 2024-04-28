@@ -1,20 +1,10 @@
-
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
 import 'package:ibm_task/widget/form_container_widget.dart';
-
 import '../../widget/custom_button.dart';
-import '../login/login_view.dart';
+import '../../widget/ext.dart';
 import '../utils/strings_manager.dart';
-// import 'package:quiz_app/screens/home_screen.dart';
-
-// import 'package:ibm_task/screens/login_page.dart';
-// import 'package:quiz_app/widget/form_container_widget.dart';
-
-// import '../service/firebase_auth_services.dart';
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -24,13 +14,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
-  // final FirebaseAuthService _auth = FirebaseAuthService();
-
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -54,9 +40,12 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               Text(
                 "Sign Up",
-                style: TextStyle(color: ColorManager.primary,fontSize: 27, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: ColorManager.primary,
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
@@ -64,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Username",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -72,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Email",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -80,22 +69,36 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Password",
                 isPasswordField: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              CustomButton(label: AppStrings.signup,
-                onClick: () {},
+              CustomButton(
+                label: AppStrings.signup,
+                onClick: () {
+                  showToast("Coming Soon!");
+                },
               ),
-              const SizedBox(height: 20,),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account?"),
-                  const SizedBox(width: 5,),
+                  const Text("Already have an account?"),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+                        Navigator.of(context)
+                            .pushReplacementNamed(Routes.loginRoute);
                       },
-                      child: Text("Login", style: TextStyle(color:ColorManager.primary, fontWeight: FontWeight.bold),))
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ))
                 ],
               )
             ],
@@ -104,22 +107,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-  // void _signUp() async {
-  //   // String username = _usernameController.text;
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
-
-  //   User? user = await _auth.signUpWithEmailAndPassword(email, password);
-
-  //   if (user!= null){
-  //     print("User is successfully created");
-  //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>HomeScreen()));
-  //   } else{
-  //     print("Some error happend");
-  //   }
-
-  // }
-
 }
- 

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
 import 'package:ibm_task/presentation/utils/strings_manager.dart';
+import 'package:ibm_task/widget/ext.dart';
 import 'package:ibm_task/widget/form_container_widget.dart';
 
 import '../../widget/custom_button.dart';
@@ -67,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomButton(
                 label: AppStrings.login,
-                onClick: () {},
+                onClick: () {
+                  showToast("Coming Soon!");
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -103,12 +107,38 @@ class _LoginPageState extends State<LoginPage> {
                     width: 5,
                   ),
                   GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(Routes.mainScreen);
+                        onTap: () async {
+                          try {
+                            final userCredential = await FirebaseAuth.instance.signInAnonymously();
+                            if(userCredential.user ==null){
+                              if (kDebugMode) {
+                                print("an error has been ouccer");
+                              }
+                              showToast("an error has been ouccer",isError: true);
+                            }else{
+                              if (kDebugMode) {
+                                print(userCredential.user);
+                              }
+                              Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            switch (e.code) {
+                              case "operation-not-allowed":
+                                if (kDebugMode) {
+                                  print("Anonymous auth hasn't been enabled for this project.");
+                                }
+                                showToast("Anonymous auth hasn't been enabled for this project.",isError: true);
+                                break;
+                              default:
+                                if (kDebugMode) {
+                                  print("Unknown error.");
+                                }
+                                showToast("Unknown error.",isError: true);
+                            }
+                        }
                       },
                       child: Text(
-                        "Lets go!",
+                        "Lets go! 🕵️",
                         style: TextStyle(
                             color: ColorManager.primary,
                             fontWeight: FontWeight.bold),
@@ -116,42 +146,42 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("login & sign up doesn't work now"),
-                  const Text("\tLogin Anonymously"),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () async {
-                        try {
-                          final userCredential = await FirebaseAuth.instance.signInAnonymously();
-                          if(userCredential.user ==null){
-                             print("an error has been ouccer");
-                          }else{
-                            print(userCredential.user);
-                          Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
-                          }
-                        } on FirebaseAuthException catch (e) {
-                          switch (e.code) {
-                            case "operation-not-allowed":
-                              print("Anonymous auth hasn't been enabled for this project.");
-                              break;
-                            default:
-                              print("Unknown error.");
-                          }
-                        }
-                      },
-                      child: Text(
-                        "Lets go!",
-                        style: TextStyle(
-                            color: ColorManager.primary,
-                            fontWeight: FontWeight.bold),
-                      ))
-                ],
-              )
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text("login & sign up doesn't work now"),
+              //     const Text("\tLogin Anonymously"),
+              //     const SizedBox(
+              //       width: 5,
+              //     ),
+              //     GestureDetector(
+              //         onTap: () async {
+              //           try {
+              //             final userCredential = await FirebaseAuth.instance.signInAnonymously();
+              //             if(userCredential.user ==null){
+              //                print("an error has been ouccer");
+              //             }else{
+              //               print(userCredential.user);
+              //             Navigator.of(context).pushReplacementNamed(Routes.mainScreen);
+              //             }
+              //           } on FirebaseAuthException catch (e) {
+              //             switch (e.code) {
+              //               case "operation-not-allowed":
+              //                 print("Anonymous auth hasn't been enabled for this project.");
+              //                 break;
+              //               default:
+              //                 print("Unknown error.");
+              //             }
+              //           }
+              //         },
+              //         child: Text(
+              //           "Lets go!",
+              //           style: TextStyle(
+              //               color: ColorManager.primary,
+              //               fontWeight: FontWeight.bold),
+              //         ))
+              //   ],
+              // )
             
             ],
           ),

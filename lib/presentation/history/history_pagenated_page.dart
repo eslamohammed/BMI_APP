@@ -2,9 +2,9 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterfire_ui/firestore.dart';
 import 'package:ibm_task/models/bmi.dart';
 import 'package:ibm_task/presentation/utils/color_manager.dart';
 import 'package:ibm_task/presentation/utils/routes_manager.dart';
@@ -12,11 +12,12 @@ import 'package:ibm_task/presentation/utils/styles_manager.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 import 'package:ibm_task/widget/historyWidget.dart';
 
+import '../../widget/ext.dart';
+
 class PaginatedHistoryPage extends StatelessWidget {
    PaginatedHistoryPage({super.key});
 
-  // ignore: non_constant_identifier_names
-  final queryBmi_List = FirebaseFirestore.instance
+  final queryBmiList = FirebaseFirestore.instance
   .collection('BMI_List')
   .orderBy('createdAt',descending:true)
   .withConverter<BmiModel>(
@@ -47,7 +48,7 @@ class PaginatedHistoryPage extends StatelessWidget {
               ))),
       backgroundColor: ColorManager.white,
       body: FirestoreQueryBuilder<BmiModel>(
-        query: queryBmi_List,
+        query: queryBmiList,
         pageSize: 10,
         builder: (context,snapshot,_){
           return  ListView.builder(
@@ -70,6 +71,7 @@ class PaginatedHistoryPage extends StatelessWidget {
                   if (direction == DismissDirection.endToStart) {
                     await snapshot.docs[index].reference.delete();
                     snapshot.docs.removeAt(index);
+                    showToast("Item removed!");
                   }
                 },
 
