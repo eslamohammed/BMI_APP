@@ -28,6 +28,15 @@ TextStyle get headline3 => const TextStyle(
   letterSpacing: 0,
 );
 
+TextStyle get headline4 => const TextStyle(
+  fontSize: 14,
+  decoration: TextDecoration.none,
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w700,
+  height: 24 / 16,
+  letterSpacing: 0,
+);
+
 TextStyle get bodyText1 => const TextStyle(
   fontSize: 16,
   decoration: TextDecoration.none,

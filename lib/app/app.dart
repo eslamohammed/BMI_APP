@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: getApplicationTheme(),
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.splashRoute,
+        initialRoute: Routes.paginatedHistoryPage,
       ),
     );
   }

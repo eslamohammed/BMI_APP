@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ibm_task/presentation/utils/values_manager.dart';
 
 class GenderContainerBox extends StatelessWidget {
-  const GenderContainerBox({Key? key, required this.boxColor, required this.childWidget, required this.onTap}) : super(key: key);
+  GenderContainerBox({Key? key, required this.boxColor, required this.childWidget, required this.onTap , this.size}) : super(key: key);
   final Color boxColor;
   final Widget childWidget;
   final VoidCallback onTap;
+  double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class GenderContainerBox extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          margin: const EdgeInsets.all(AppSize.s16),
+          margin: EdgeInsets.all(size ?? AppSize.s16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s16),
             border: Border.all(color: boxColor,width: AppSize.s2),
