@@ -13,6 +13,7 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../blocs/bloc_exports.dart';
 import '../../widget/container_box.dart';
 import '../../widget/data_container.dart';
+import '../../widget/ext.dart';
 
 final activeColor = ColorManager.primary;
 const inActiveColor = ColorManager.dustGrey;
@@ -274,15 +275,14 @@ class _MainScreenState extends State<MainScreen>{
             Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("To view your BMI History [Paginated]"),
+              const Text("To view your BMI "),
               const SizedBox(
                 width: 5,
               ),
               GestureDetector(
                   onTap: () {
                     BlocProvider.of<BmiBloc>(context).add(FetchBMIEvent());
-                    Navigator.of(context)
-                        .pushReplacementNamed(Routes.paginatedHistoryPage);
+                    Navigator.of(context).pushNamed(Routes.paginatedHistoryPage);
                   },
                   child: Text(
                     AppStrings.history,
@@ -316,6 +316,8 @@ class _MainScreenState extends State<MainScreen>{
                             bmi: bmi,
                             // createdAt: DateTime.now()
                             ));
+                        showToast("Saved");
+
                       });
                 },
               ))
