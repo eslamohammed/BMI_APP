@@ -95,26 +95,26 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Soft login"),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed(Routes.mainScreen);
-                      },
-                      child: Text(
-                        "Lets go!",
-                        style: TextStyle(
-                            color: ColorManager.primary,
-                            fontWeight: FontWeight.bold),
-                      ))
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text("Soft login"),
+              //     const SizedBox(
+              //       width: 5,
+              //     ),
+              //     GestureDetector(
+              //         onTap: () {
+              //           Navigator.of(context)
+              //               .pushReplacementNamed(Routes.mainScreen);
+              //         },
+              //         child: Text(
+              //           "Lets go!",
+              //           style: TextStyle(
+              //               color: ColorManager.primary,
+              //               fontWeight: FontWeight.bold),
+              //         ))
+              //   ],
+              // ),
               
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
