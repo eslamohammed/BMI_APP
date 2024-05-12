@@ -50,6 +50,11 @@ class PaginatedHistoryPage extends StatelessWidget {
       body: FirestoreQueryBuilder<BmiModel>(
         query: queryBmiList,
         pageSize: 3,
+        // loadingBuilder: (context) {
+        //   return Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // },
         builder: (context,snapshot,_){
           return  ListView.builder(
             itemCount: snapshot.docs.length,
@@ -57,10 +62,15 @@ class PaginatedHistoryPage extends StatelessWidget {
               final hasEndReached = snapshot.hasMore && index + 1 == snapshot.docs.length && !snapshot.isFetchingMore;
 
               if(hasEndReached){
-                Future.delayed(const Duration(seconds: 1), () {
+                // Future.delayed(const Duration(seconds: 1), () {
+                // // showToast("GetMore!");
+                // // snapshot.fetchMore();
+                // return const Center(
+                //     child: CircularProgressIndicator(color: Colors.black,),
+                //   );
+                // });
                 showToast("GetMore!");
                 snapshot.fetchMore();
-                });
               }
               return History(
                 height: snapshot.docs[index].data().height,
