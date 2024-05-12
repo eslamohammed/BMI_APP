@@ -49,7 +49,7 @@ class PaginatedHistoryPage extends StatelessWidget {
       backgroundColor: ColorManager.white,
       body: FirestoreQueryBuilder<BmiModel>(
         query: queryBmiList,
-        pageSize: 10,
+        pageSize: 3,
         builder: (context,snapshot,_){
           return  ListView.builder(
             itemCount: snapshot.docs.length,
@@ -57,7 +57,10 @@ class PaginatedHistoryPage extends StatelessWidget {
               final hasEndReached = snapshot.hasMore && index + 1 == snapshot.docs.length && !snapshot.isFetchingMore;
 
               if(hasEndReached){
+                Future.delayed(const Duration(seconds: 1), () {
+                showToast("GetMore!");
                 snapshot.fetchMore();
+                });
               }
               return History(
                 height: snapshot.docs[index].data().height,
